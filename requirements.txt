@@ -1,1 +1,5 @@
 pytest
+pyautogui
+pyscreeze
+pytesseract
+Pillow
