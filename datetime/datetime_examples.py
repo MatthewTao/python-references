@@ -11,5 +11,14 @@ def get_datetime_iso_str():
     return str_fmt
 
 
+def convert_seconds_left_to_str(seconds_left):
+    """
+    Returns the number of minutes and seconds left when given a second countdown
+    """
+    minutes_left = int(seconds_left // 60)
+    seconds_left = int(seconds_left - minutes_left * 60)
+    return f'{minutes_left} mins {seconds_left} secs'
+
+
 if __name__ == '__main__':
     print(get_datetime_iso_str())
