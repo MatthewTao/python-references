@@ -20,5 +20,11 @@ def convert_seconds_left_to_str(seconds_left):
     return f'{minutes_left} mins {seconds_left} secs'
 
 
+def convert_datetime_to_epoch(datetime_str, datetime_format='%d/%m/%Y'):
+    datetime_obj = datetime.strptime(datetime_str, datetime_format)
+    timestamp = int(datetime.timestamp(datetime_obj))
+    return timestamp
+
+
 if __name__ == '__main__':
     print(get_datetime_iso_str())
