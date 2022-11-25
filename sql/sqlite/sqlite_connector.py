@@ -12,6 +12,9 @@ class SqliteConnector:
     def execute_query(self, query):
         """
         Executes any query and returns the results
+        
+        Ideally the query would be something like below, using paramatrised queries.
+        cursor.execute("INSERT INTO staff (person_id, lastname) VALUES (?, ?)", (51, "Mc'Donald")) 
         """
         self._get_cursor()
         response = None
