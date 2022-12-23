@@ -1,0 +1,8 @@
+high_level_heading_1:
+  key1: hello there
+  key2: General Kenobi
+
+# Comments in YAML are after hash
+blacklist:
+  not_allowed: ['something', 'blah blah', 'foo']
+  not_safe: [1, 3, 5, 9]
