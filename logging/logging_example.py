@@ -12,6 +12,8 @@ def main():
     logging.info("info message")
     logging.warning("warning message")
     logging.error("error message")
+    logging.error("Exception occurred", exc_info=True)
+    logging.exception("Exception occurred")  # This is equivalent to the line above
     logging.critical("critical message")
 
 
@@ -56,3 +58,23 @@ def logging_to_external_service():
     # Logs can contain sensitive data.
     # Or DON'T log sensitve data all together.
     # Never assume log files are secure
+
+def formatters():
+    # Create a custom logger
+    logger = logging.getLogger(__name__)
+
+    # Create handlers
+    c_handler = logging.StreamHandler()
+    f_handler = logging.FileHandler('file.log')
+    c_handler.setLevel(logging.WARNING)
+    f_handler.setLevel(logging.ERROR)
+
+    # Create formatters and add it to handlers
+    c_format = logging.Formatter('%(name)s - %(levelname)s - %(message)s')
+    f_format = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+    c_handler.setFormatter(c_format)
+    f_handler.setFormatter(f_format)
+
+    # Add handlers to the logger
+    logger.addHandler(c_handler)
+    logger.addHandler(f_handler)
