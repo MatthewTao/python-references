@@ -37,6 +37,21 @@ def logging_to_file():
     )
 
 
+def logging_to_file_and_console():
+    """
+    This way, the logs would be pushed to the console and to the file
+    """
+    logging.basicConfig(
+        level=logging.DEBUG,
+        format="%(asctime)s %(levelname)s %(message)s",
+        datefmt="%Y-%m-%d %H:%M:%S",
+        handlers=[
+            logging.FileHandler("basic.log"),
+            logging.StreamHandler()
+        ]
+    )
+
+
 def logging_to_external_service():
     from logging.handlers import SysLogHandler
     # There are many log handlers that can send logs to different places
