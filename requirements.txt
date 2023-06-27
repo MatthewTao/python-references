@@ -1,3 +1,5 @@
+argparse
+boto3
 pytest
 pyautogui
 pyscreeze
