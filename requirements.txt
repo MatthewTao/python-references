@@ -6,3 +6,4 @@ pyscreeze
 pytesseract
 Pillow
 plyer
+PyYAML
