@@ -2,9 +2,5 @@
 
 Little references here and there.
 
-## References
-
-- Python strings
-- Handling CSVs
-- Common datetime functions
-- Placeholder for proper logging
+There are some really dumb things here,
+and hopefully there are some useful things here too.
