@@ -7,4 +7,5 @@ pytesseract
 Pillow
 plyer
 PyYAML
+simpy
 sqlalchemy
