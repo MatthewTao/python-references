@@ -6,3 +6,5 @@ high_level_heading_1:
 blacklist:
   not_allowed: ['something', 'blah blah', 'foo']
   not_safe: [1, 3, 5, 9]
+
+root_level_item: something

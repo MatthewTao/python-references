@@ -16,3 +16,4 @@ if __name__ == '__main__':
     print(test_config)
     print(f'Config is now a dict: {test_config.get("high_level_heading_1")}')
     print(f'Config is now a dict: {test_config["high_level_heading_1"]["key1"]}')
+    print(f'Config at the root level: {test_config["root_level_item"]}')
