@@ -1,5 +1,6 @@
 # Testing files
 *test_db.db
+*sqlalchemy2example.db
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
