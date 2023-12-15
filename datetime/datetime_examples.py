@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, date, time, tzinfo
 
 
 def get_datetime_iso_str():
@@ -11,10 +11,15 @@ def get_datetime_iso_str():
     return str_fmt
 
 
+def date_to_datetime(date_obj: date, tz: tzinfo | None = None) -> datetime:
+    return datetime.combine(date_obj, time.min, tzinfo=tz)
+
+
 def get_datetime_as_string(fmt="%Y-%m-%dT%H:%M:%S.%f"):
     now = datetime.now()
     str_fmt = now.strftime(fmt)
     return str_fmt
+
 
 def convert_seconds_left_to_str(seconds_left):
     """
@@ -22,15 +27,15 @@ def convert_seconds_left_to_str(seconds_left):
     """
     minutes_left = int(seconds_left // 60)
     seconds_left = int(seconds_left - minutes_left * 60)
-    return f'{minutes_left} mins {seconds_left} secs'
+    return f"{minutes_left} mins {seconds_left} secs"
 
 
-def convert_datetime_to_epoch(datetime_str, datetime_format='%d/%m/%Y'):
+def convert_datetime_to_epoch(datetime_str, datetime_format="%d/%m/%Y"):
     datetime_obj = datetime.strptime(datetime_str, datetime_format)
     timestamp = int(datetime.timestamp(datetime_obj))
     return timestamp
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     print(get_datetime_iso_str())
     print(get_datetime_as_string())
