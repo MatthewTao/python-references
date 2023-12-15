@@ -23,7 +23,7 @@ def identity(x):
 
 both of them takes an argument x and returns it upon invocation.
 
-Because a lambda function is an expression, it can be named. Therefore you could write the previous code as follows:
+Because a lambda function is an expression, it can be named. Therefore, you could write the previous code as follows:
 
 ```python
 >>> add_one = lambda x: x + 1
