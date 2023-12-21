@@ -5,17 +5,18 @@ class SillyLog:
     """
     Just a silly thing to imitate a proper logger for now
     """
-    def get_time(self):
+    @staticmethod
+    def _get_time():
         return datetime.now().strftime('%Y-%m-%d %H:%M:%S.%f')
     
     def info(self, message):
-        print(f'{self.get_time()} (INFO) {message}')
+        print(f'{self._get_time()} (INFO) {message}')
         
     def debug(self, message):
-        print(f'{self.get_time()} (DEBUG)    {message}')
+        print(f'{self._get_time()} (DEBUG)    {message}')
         
     def error(self, message):
-        print(f'{self.get_time()} (ERROR) {message}')
+        print(f'{self._get_time()} (ERROR) {message}')
         
 
 def get_logger(log_name):
