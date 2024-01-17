@@ -9,7 +9,7 @@ class SqliteConnector:
         self.connection = sqlite3.connect(path)
         self.cursor = None
 
-    def execute_query(self, query):
+    def execute_query(self, query, parameters=None):
         """
         Executes any query and returns the results
         
@@ -19,7 +19,10 @@ class SqliteConnector:
         self._get_cursor()
         response = None
         try:
-            response = self.cursor.execute(query)
+            if parameters:
+                response = self.cursor.execute(query, parameters)
+            else:
+                response = self.cursor.execute(query)
         except Exception as e:
             print(f'Execution failed: {e}')
             self._rollback()
