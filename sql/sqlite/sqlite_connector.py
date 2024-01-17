@@ -12,9 +12,9 @@ class SqliteConnector:
     def execute_query(self, query, parameters=None):
         """
         Executes any query and returns the results
-        
+
         Ideally the query would be something like below, using paramatrised queries.
-        cursor.execute("INSERT INTO staff (person_id, lastname) VALUES (?, ?)", (51, "Mc'Donald")) 
+        cursor.execute("INSERT INTO staff (person_id, lastname) VALUES (?, ?)", (51, "Mc'Donald"))
         """
         self._get_cursor()
         response = None
@@ -24,11 +24,11 @@ class SqliteConnector:
             else:
                 response = self.cursor.execute(query)
         except Exception as e:
-            print(f'Execution failed: {e}')
+            print(f"Execution failed: {e}")
             self._rollback()
         else:
             self._commit()
-        
+
         return response
 
     def _get_cursor(self):
@@ -45,12 +45,12 @@ class SqliteConnector:
 
     def _commit(self):
         if self.connection is None:
-            print('No cursor to commit')
+            print("No cursor to commit")
         else:
             self.connection.commit()
 
     def _rollback(self):
         if self.connection is None:
-            print('No cursor to rollback')
+            print("No cursor to rollback")
         else:
             self.connection.rollback()

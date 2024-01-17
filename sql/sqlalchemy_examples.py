@@ -3,8 +3,17 @@ This code uses a sample data base that can be found here
 https://www.kaggle.com/datasets/groleo/european-football-database?resource=download
 """
 from sqlalchemy import (
-    create_engine, insert, select, and_,
-    MetaData, Table, Column, Integer, String, Boolean)
+    create_engine,
+    insert,
+    select,
+    and_,
+    MetaData,
+    Table,
+    Column,
+    Integer,
+    String,
+    Boolean,
+)
 import pandas as pd
 
 """
@@ -30,19 +39,18 @@ def simple_select_example():
     engine = create_engine(SAMPLE_TABLE_PATH)
     conn = engine.connect()
 
-
-    metadata = MetaData() #extracting the metadata
-    division= Table('divisions', metadata, autoload_with=engine)
-    print(repr(metadata.tables['divisions']))
+    metadata = MetaData()  # extracting the metadata
+    division = Table("divisions", metadata, autoload_with=engine)
+    print(repr(metadata.tables["divisions"]))
     print(division.columns.keys())
 
     query = select(division)
     print(f"Query generated {query}")
 
-    exe = conn.execute(query) #executing the query
-    result = exe.fetchmany(5) #extracting top 5 results
+    exe = conn.execute(query)  # executing the query
+    result = exe.fetchmany(5)  # extracting top 5 results
     print(result)
-    
+
     # Manual close here. Consider using `with` block
     conn.close()
 
@@ -51,13 +59,17 @@ def select_example():
     engine = create_engine(SAMPLE_TABLE_PATH)
     conn = engine.connect()
     metadata = MetaData()
-    division = Table('divisions', metadata, autoload_with=engine)
-    match = Table('matchs', metadata, autoload_with=engine)
+    division = Table("divisions", metadata, autoload_with=engine)
+    match = Table("matchs", metadata, autoload_with=engine)
 
-    query = select(division, match).\
-    select_from(division.join(match,division.columns.division == match.columns.Div)).\
-    where(and_(division.columns.division == "E1", match.columns.season == 2009 )).\
-    order_by(match.columns.HomeTeam)
+    query = (
+        select(division, match)
+        .select_from(
+            division.join(match, division.columns.division == match.columns.Div)
+        )
+        .where(and_(division.columns.division == "E1", match.columns.season == 2009))
+        .order_by(match.columns.HomeTeam)
+    )
     output = conn.execute(query)
     results = output.fetchall()
 
@@ -68,24 +80,25 @@ def select_example():
 def quick_end_to_end_example():
     """
     A small demonstration of the four CRUD methods
-    
+
     The statement generation would work with or without a valid connection
     """
-    engine = create_engine('sqlite:///quick_example.sqlite')
+    engine = create_engine("sqlite:///quick_example.sqlite")
     conn = engine.connect()
     metadata = MetaData()
 
-    Student = Table('Student', metadata,
-                Column('Id', Integer(),primary_key=True),
-                Column('Name', String(255), nullable=False),
-                Column('Major', String(255)),
-                Column('Pass', Boolean(), default=True)
-                )
+    Student = Table(
+        "Student",
+        metadata,
+        Column("Id", Integer(), primary_key=True),
+        Column("Name", String(255), nullable=False),
+        Column("Major", String(255)),
+        Column("Pass", Boolean(), default=True),
+    )
 
     metadata.create_all(engine)
 
-
-    query = insert(Student).values(Id=1, Name='Matthew', Major="English", Pass=True)
+    query = insert(Student).values(Id=1, Name="Matthew", Major="English", Pass=True)
     print(f"\n\n{query}")
     conn.execute(query)
 
@@ -96,22 +109,26 @@ def quick_end_to_end_example():
 
     # Insert many rows
     many_in_query = insert(Student)
-    values_list = [{'Id':'2', 'Name':'Nisha', 'Major':"Science", 'Pass':False},
-                {'Id':'3', 'Name':'Natasha', 'Major':"Math", 'Pass':True},
-                {'Id':'4', 'Name':'Ben', 'Major':"English", 'Pass':False}]
-    conn.execute(many_in_query,values_list)
+    values_list = [
+        {"Id": "2", "Name": "Nisha", "Major": "Science", "Pass": False},
+        {"Id": "3", "Name": "Natasha", "Major": "Math", "Pass": True},
+        {"Id": "4", "Name": "Ben", "Major": "English", "Pass": False},
+    ]
+    conn.execute(many_in_query, values_list)
     output = conn.execute(Student.select()).fetchall()
     print(f"\n\n{many_in_query}")
     print(output)
 
     # SELECT with WHERE
-    query = select(Student).where(Student.columns.Major == 'English')
+    query = select(Student).where(Student.columns.Major == "English")
     output = conn.execute(query)
     print(f"\n\n{query}")
     print(output.fetchall())
 
     # SELECT with WHERE AND
-    query = Student.select().where(and_(Student.columns.Major == 'English', Student.columns.Pass != True))
+    query = Student.select().where(
+        and_(Student.columns.Major == "English", Student.columns.Pass != True)
+    )
     output = conn.execute(query)
     print(f"\n\n{query}")
     print(output.fetchall())
@@ -148,18 +165,18 @@ select([Student.columns.Major.distinct()])
     """
 
     # UPDATE
-    query = Student.update().values(Pass = True).where(Student.columns.Name == "Nisha")
+    query = Student.update().values(Pass=True).where(Student.columns.Name == "Nisha")
     conn.execute(query)
 
-    query = select(Student).where(Student.columns.Name == 'Nisha')
+    query = select(Student).where(Student.columns.Name == "Nisha")
     output = conn.execute(query)
     print(f"\n\n{query}")
     print(output.fetchall())
 
-    query = Student.update().values(Pass = False).where(Student.columns.Name == "Nisha")
+    query = Student.update().values(Pass=False).where(Student.columns.Name == "Nisha")
     conn.execute(query)
 
-    query = select(Student).where(Student.columns.Name == 'Nisha')
+    query = select(Student).where(Student.columns.Name == "Nisha")
     output = conn.execute(query)
     print(f"\n\n{query}")
     print(output.fetchall())
@@ -173,7 +190,7 @@ select([Student.columns.Major.distinct()])
     print(f"\n\n{query}")
     print(output.fetchall())
 
-    query = insert(Student).values(Id=4, Name='Ben', Major="English", Pass=False)
+    query = insert(Student).values(Id=4, Name="Ben", Major="English", Pass=False)
     conn.execute(query)
 
     query = select(Student)
@@ -182,5 +199,6 @@ select([Student.columns.Major.distinct()])
     print(output.fetchall())
 
     conn.close()
+
 
 quick_end_to_end_example()
