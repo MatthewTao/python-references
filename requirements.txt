@@ -1,5 +1,7 @@
 argparse
 boto3
+matplotlib
+pandas
 pytest
 pyautogui
 pyscreeze
