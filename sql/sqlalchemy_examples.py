@@ -76,6 +76,19 @@ def select_example():
     data = pd.DataFrame(results)
     print(data.head())
 
+    # Depending on how the results will be used, it might not be best to use fetchall()
+    # you can iterate over the results as well
+    for row in output:
+        # Do some transformation or whatever
+        # This will present the results in a tuple like fashion as a sqlalchemy Row object
+        print(row)
+
+    # Or if a dictionary like representation and interface is better
+    for row_mapping in output.mappings():
+        # do some transformation or whatever
+        # e.g. can reference things like `row_mapping["column_name"]` or `row_mapping.column_name`
+        print(row_mapping)
+
 
 def quick_end_to_end_example():
     """
@@ -201,4 +214,6 @@ select([Student.columns.Major.distinct()])
     conn.close()
 
 
-quick_end_to_end_example()
+if __name__ == "__main__":
+    select_example()
+    # quick_end_to_end_example()
