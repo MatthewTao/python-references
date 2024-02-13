@@ -1,9 +1,11 @@
 argparse
 boto3
+click
 flask
 matplotlib
 pandas
 pytest
+python-dotenv
 pyautogui
 pyscreeze
 pytesseract
