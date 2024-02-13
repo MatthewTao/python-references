@@ -1,5 +1,6 @@
 argparse
 boto3
+flask
 matplotlib
 pandas
 pytest
