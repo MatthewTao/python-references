@@ -2,7 +2,7 @@ from dotenv import load_dotenv
 from flask import Flask
 import os
 
-from board import database, errors, pages, posts
+from src import database, errors, pages, posts
 
 
 load_dotenv()

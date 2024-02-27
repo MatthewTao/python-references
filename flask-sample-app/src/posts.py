@@ -1,6 +1,6 @@
-from flask import Blueprint, flash, redirect, render_template, request, url_for
+from flask import Blueprint, current_app, flash, redirect, render_template, request, url_for
 
-from board.database import get_db
+from src.database import get_db
 
 bp = Blueprint("posts", __name__)
 
@@ -18,6 +18,7 @@ def create():
                 (author, message),
             )
             db.commit()
+            current_app.logger.info("New post created")
             flash(f"Thanks for posting, {author}!", category="success")
             # Redirect to another page to view the added item
             return redirect(url_for("posts.posts"))
