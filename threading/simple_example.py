@@ -37,6 +37,8 @@ class TestObject:
 
 if __name__ == "__main__":
     test_object = TestObject()
+    # Can alternatively pass in args with args or kwargs
+    # e.g. Thread(target=some_function, args=(10, )
     t1 = Thread(target=test_object.my_forever_while)
     t2 = Thread(target=test_object.take_input)
 
