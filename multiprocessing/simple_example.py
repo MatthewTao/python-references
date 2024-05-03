@@ -1,33 +1,56 @@
+from datetime import datetime
 import multiprocessing
-import time
+import os
 
 
-def cpu_bound(number):
-    return sum(i * i for i in range(number))
+def time_consuming_task(number=90000000):
+    print(f"{datetime.now().isoformat()}: Start intensive task")
+    result = sum(i * i for i in range(number))
+    print(f"{datetime.now().isoformat()}: Intensive task finished")
+    return result
 
 
-def find_sum(numbers):
-    for number in numbers:
-        cpu_bound(number)
+def worker1(message):
+    # printing process id
+    print(f"{datetime.now().isoformat()}: ID of process running worker1: {os.getpid()}")
+    print(message)
+
+    time_consuming_task()
+    print(f"{datetime.now().isoformat()}: First process finished")
 
 
-def find_sum_multi(numbers):
-    with multiprocessing.Pool() as pool:
-        pool.map(cpu_bound, numbers)
+def worker2(punctuation, message):
+    print(f"{datetime.now().isoformat()}: Second process started")
+    # printing process id
+    print(f"{datetime.now().isoformat()}: ID of process running worker2: {os.getpid()}")
+
+    print(message, punctuation)
+    print(f"{datetime.now().isoformat()}: Second process finished")
 
 
 if __name__ == "__main__":
-    number_of_iterations = int(input("How many iterations? [default=100] ") or 100)
-    numbers = [5000000 + x for x in range(number_of_iterations)]
+    # printing main program process id
+    print(f"{datetime.now().isoformat()}: ID of main process: {os.getpid()}")
 
-    start_time = time.perf_counter()
-    find_sum_multi(numbers)
-    end_time = time.perf_counter()
+    # creating processes
+    p1 = multiprocessing.Process(target=worker1, args=("Hello world", ))
+    p2 = multiprocessing.Process(target=worker2, kwargs={"message": "Hello World", "punctuation": "!"})
 
-    print(f"Multiprocessing took {int(end_time - start_time)} seconds")
+    # starting processes
+    p1.start()
+    p2.start()
 
-    start_time = time.perf_counter()
-    find_sum(numbers)
-    end_time = time.perf_counter()
+    # process IDs
+    print("ID of process p1: {}".format(p1.pid))
+    print("ID of process p2: {}".format(p2.pid))
 
-    print(f"No multiprocessing took {int(end_time - start_time)} seconds")
+    # wait until processes are finished
+    p1.join()
+    p2.join()
+
+    # both processes finished
+    print(f"{datetime.now().isoformat()}: Both processes finished execution!")
+
+    # check if processes are alive
+    print("Process p1 is alive: {}".format(p1.is_alive()))
+    print("Process p2 is alive: {}".format(p2.is_alive()))
