@@ -9,14 +9,14 @@ root.title('Tkinter Window Demo')
 root.geometry('600x400+50+50')
 """
 geometry takes a weird string input `{width}x{height}{x}{y}`
-The width is the window’s width in pixels.
-The height is the window’s height in pixels.
+The width is the window's width in pixels.
+The height is the window's height in pixels.
 
-The x is the window’s horizontal position. 
+The x is the window's horizontal position. 
 +50 means the left edge of the window should be 50 pixels from the left edge of the screen.
 And -50 means the right edge of the window should be 50 pixels from the right edge of the screen.
 
-The y is the window’s vertical position.
+The y is the window's vertical position.
 +50 means the top edge of the window should be 50 pixels below the top of the screen.
 And -50 means the bottom edge of the window should be 50 pixels above the bottom of the screen.
 
@@ -46,7 +46,7 @@ root.attributes('-alpha', 0.5)
 # root.iconbitmap('./assets/pythontutorial.ico')
 
 
-# Create a Lable widget
+# Create a Label widget
 # places that widget in the root window
 message = tk.Label(root, text="Hello, World!")
 message.pack()
