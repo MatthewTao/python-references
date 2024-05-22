@@ -3,11 +3,11 @@ import random
 import string
 
 
-def generate_random_string(length:int=32):
+def generate_random_string(length: int = 32):
     """
     Generates a random string of all upper and lower case letters
     """
-    return ''.join(random.choices(string.ascii_letters, k=length))
+    return "".join(random.choices(string.ascii_letters, k=length))
 
 
 def generate_uuid():
@@ -24,11 +24,11 @@ def generate_uuid_device_time():
     return uuid.uuid1()
 
 
-if __name__ == '__main__':
-    print('Device id and current time')
+if __name__ == "__main__":
+    print("Device id and current time")
     for _ in range(10):
         print(generate_uuid_device_time())
 
-    print('Random UUID')
+    print("Random UUID")
     for _ in range(10):
         print(generate_uuid())

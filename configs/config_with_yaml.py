@@ -5,13 +5,13 @@ import yaml
 
 
 def read_yaml_config():
-    with open('config.yml', 'r') as file:
+    with open("config.yml", "r") as file:
         config = yaml.safe_load(file)
 
     return config
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     test_config = read_yaml_config()
     print(test_config)
     print(f'Config is now a dict: {test_config.get("high_level_heading_1")}')

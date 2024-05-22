@@ -3,7 +3,7 @@ import pytesseract
 
 
 def clean_img(img):
-    # adding some sharpness and contrast to the image 
+    # adding some sharpness and contrast to the image
     enhancer1 = ImageEnhance.Sharpness(img)
     enhancer2 = ImageEnhance.Contrast(img)
     img_edit = enhancer1.enhance(20.0)
@@ -20,12 +20,12 @@ def img_to_string(image_path, clear=False):
     return result
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     # img_to_string('clean_example.PNG')
-    
-    number = img_to_string('sample_number.PNG')
+
+    number = img_to_string("sample_number.PNG")
     # The numbers might have new line characters after it and may contain commas and such
-    number_int = int(number.strip().replace(',', ''))
+    number_int = int(number.strip().replace(",", ""))
     print(number_int)
 
-    number = img_to_string('number_with_complex_background.PNG')
+    number = img_to_string("number_with_complex_background.PNG")

@@ -3,6 +3,7 @@ from pyscreeze import ImageNotFoundException
 import pyautogui
 import time
 
+
 def find_button(path_to_image, confidence=0.9, delay=0.5, attempts=5):
     buttonx = None
     buttony = None
@@ -22,8 +23,9 @@ def find_button(path_to_image, confidence=0.9, delay=0.5, attempts=5):
             break
 
     if buttonx is None:
-        raise Exception('Button not found')
+        raise Exception("Button not found")
     return buttonx, buttony
+
 
 def click_button(path_to_image):
     x, y = find_button(path_to_image)

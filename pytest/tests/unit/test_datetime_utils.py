@@ -1,10 +1,14 @@
 import pytest
 
-from dummy_src.datetime_utils import (combine_date_and_time, epoch_to_str, string_datetime_to_epoch)
+from dummy_src.datetime_utils import (
+    combine_date_and_time,
+    epoch_to_str,
+    string_datetime_to_epoch,
+)
 
 unify_date_time_formats_test_data = [
-    ('2019/06/23 23:45:38', '%Y/%m/%d %H:%M:%S', '%Y%m%d%H', '2019062323'),
-    ('2014-07-04 11:51:54', '%Y-%m-%d %H:%M:%S', '%Y%m%d%H', '2014070411')
+    ("2019/06/23 23:45:38", "%Y/%m/%d %H:%M:%S", "%Y%m%d%H", "2019062323"),
+    ("2014-07-04 11:51:54", "%Y-%m-%d %H:%M:%S", "%Y%m%d%H", "2014070411"),
 ]
 
 
@@ -26,13 +30,13 @@ unify_date_time_formats_test_data = [
 
 
 combine_date_and_time_test_data = [
-    ('2019/06/23', '%Y/%m/%d', '23:45:38', '%H:%M:%S', '2019/06/23T23:45:38'),
-    ('2014-07-04', '%Y-%m-%d', '11:51:54', '%H:%M:%S', '2014-07-04T11:51:54')
+    ("2019/06/23", "%Y/%m/%d", "23:45:38", "%H:%M:%S", "2019/06/23T23:45:38"),
+    ("2014-07-04", "%Y-%m-%d", "11:51:54", "%H:%M:%S", "2014-07-04T11:51:54"),
 ]
 
 
 @pytest.mark.parametrize(
-    'date, date_format, time, time_format, expected', combine_date_and_time_test_data
+    "date, date_format, time, time_format, expected", combine_date_and_time_test_data
 )
 def test_combine_date_and_time(date, date_format, time, time_format, expected):
     """
@@ -40,7 +44,9 @@ def test_combine_date_and_time(date, date_format, time, time_format, expected):
     | When a desired datetime string format is provided,
     | Then the date and time can be combined into a datetime string
     """
-    combined_datetime, combined_datetime_format = combine_date_and_time(date, date_format, time, time_format)
+    combined_datetime, combined_datetime_format = combine_date_and_time(
+        date, date_format, time, time_format
+    )
 
     assert combined_datetime == expected
 
@@ -63,12 +69,13 @@ def test_combine_date_and_time(date, date_format, time, time_format, expected):
 
 
 @pytest.mark.parametrize(
-    'epoch, str_format, expected_datetime', [
-        (1546383684, '%Y-%m-%d T%H:%M:%S', '2019-01-01 T23:01:24'),
-        (1546300800, '%Y-%m-%d T%H:%M:%S', '2019-01-01 T00:00:00'),
-        (1546383684, '%Y-%m-%d T%H:%M:%S.%f', '2019-01-01 T23:01:24.000000'),
-        (1546300800, '%Y-%m-%d T%H:%M:%S.%f', '2019-01-01 T00:00:00.000000')
-    ]
+    "epoch, str_format, expected_datetime",
+    [
+        (1546383684, "%Y-%m-%d T%H:%M:%S", "2019-01-01 T23:01:24"),
+        (1546300800, "%Y-%m-%d T%H:%M:%S", "2019-01-01 T00:00:00"),
+        (1546383684, "%Y-%m-%d T%H:%M:%S.%f", "2019-01-01 T23:01:24.000000"),
+        (1546300800, "%Y-%m-%d T%H:%M:%S.%f", "2019-01-01 T00:00:00.000000"),
+    ],
 )
 def test_epoch_conversions(epoch, str_format, expected_datetime):
     """

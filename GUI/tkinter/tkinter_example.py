@@ -5,8 +5,8 @@ import tkinter as tk
 
 
 root = tk.Tk()
-root.title('Tkinter Window Demo')
-root.geometry('600x400+50+50')
+root.title("Tkinter Window Demo")
+root.geometry("600x400+50+50")
 """
 geometry takes a weird string input `{width}x{height}{x}{y}`
 The width is the window's width in pixels.
@@ -40,7 +40,7 @@ root.geometry(f'{window_width}x{window_height}+{center_x}+{center_y}')
 """
 
 # 0 fully transparent, 1.0 opaque default is 1
-root.attributes('-alpha', 0.5)
+root.attributes("-alpha", 0.5)
 
 # To change the default icon. Must be .ico file
 # root.iconbitmap('./assets/pythontutorial.ico')

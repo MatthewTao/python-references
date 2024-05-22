@@ -101,6 +101,7 @@ class SqliteHandler(Handler):
     """
     Example SQLite Log Handler
     """
+
     def __init__(self, db_file):
         super().__init__()
         self.db_file = db_file

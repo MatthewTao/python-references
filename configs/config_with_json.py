@@ -13,7 +13,7 @@ def read_json_config(path):
     return config
 
 
-if __name__ == '__main__':
-    config = read_json_config('config.json')
+if __name__ == "__main__":
+    config = read_json_config("config.json")
     print(config)
     print(f'Test value: {config.get("test_key")}')

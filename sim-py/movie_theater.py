@@ -27,7 +27,6 @@ class Theater(object):
         self.server = simpy.Resource(env, num_servers)
         self.usher = simpy.Resource(env, num_ushers)
 
-
     def purchase_ticket(self, moviegoer):
         # print(f'{moviegoer} purchased a ticket')
         yield self.env.timeout(random.randint(1, 3))
@@ -50,8 +49,8 @@ def go_to_movies(env, moviegoer, theater: Theater):
     # print(f'{moviegoer} arrives at {arrival_time}')
 
     with theater.cashier.request() as request:
-        yield request # This causes the movie goer to wait for an available cashier
-        
+        yield request  # This causes the movie goer to wait for an available cashier
+
         # When cashier is available, go through the purchase ticket process
         yield env.process(theater.purchase_ticket(moviegoer))
 
@@ -83,7 +82,7 @@ def run_theater(env, num_cashiers, num_servers, num_ushers):
     # Gather and confirm whether that statistic is true
     while True:
         yield env.timeout(0.20)
-        
+
         moviegoer += 1
         env.process(go_to_movies(env, moviegoer, theater))
 
@@ -135,5 +134,5 @@ def main():
     )
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

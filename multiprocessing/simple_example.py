@@ -33,8 +33,10 @@ if __name__ == "__main__":
     print(f"{datetime.now().isoformat()}: ID of main process: {os.getpid()}")
 
     # creating processes
-    p1 = multiprocessing.Process(target=worker1, args=("Hello world", ))
-    p2 = multiprocessing.Process(target=worker2, kwargs={"message": "Hello World", "punctuation": "!"})
+    p1 = multiprocessing.Process(target=worker1, args=("Hello world",))
+    p2 = multiprocessing.Process(
+        target=worker2, kwargs={"message": "Hello World", "punctuation": "!"}
+    )
 
     # starting processes
     p1.start()
