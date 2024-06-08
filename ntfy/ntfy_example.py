@@ -37,15 +37,13 @@ class NtfyConnector:
         self, message: str, title: str = None, priority: str = None, tags: str = None
     ):
         arguments = {"url": self.url, "data": message.encode(encoding="utf-8")}
-        if title or priority or tags:
-            # Create the header if these exists
-            header = {}
-            if title:
-                header.update({"Title": title})
-            if priority:
-                header.update({"Priority": priority})
-            if tags:
-                header.update({"Tags": tags})
+        
+        if title:
+            request.add_header("Title", title)
+        if priority:
+            request.add_header("Priority", priority)
+        if tags:
+            request.add_header("Tags", tags)
 
             arguments.update({"headers": header})
 
