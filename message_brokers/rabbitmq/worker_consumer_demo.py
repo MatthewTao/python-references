@@ -29,13 +29,20 @@ class Worker:
         # Count the number of . in the message and use sleep to simulate processing
         time.sleep(decoded_message.get("task_duration"))
 
-        print(f" {dt.datetime.now().isoformat()} Task {decoded_message.get("task_id")} is now processed")
+        print(
+            f" {dt.datetime.now().isoformat()} Task {decoded_message.get('task_id')} is now processed"
+        )
 
         # Reply and acknowledge that message is successfully processed and can be deleted
         ch.basic_ack(delivery_tag=method.delivery_tag)
 
         # Send message with results
-        self._send_result(ch, json.dumps({"task_id": decoded_message.get("task_id"), "status": "success"}))
+        self._send_result(
+            ch,
+            json.dumps(
+                {"task_id": decoded_message.get("task_id"), "status": "success"}
+            ),
+        )
 
     def _send_result(self, channel, message):
         channel.basic_publish(
@@ -48,11 +55,13 @@ class Worker:
 
 
 def main():
-    connection = pika.BlockingConnection(pika.ConnectionParameters(host="localhost"))
-    channel = connection.channel()
+    with pika.BlockingConnection(
+        pika.ConnectionParameters(host="localhost")
+    ) as connection:
+        channel = connection.channel()
 
-    worker = Worker(channel)
-    worker.run()
+        worker = Worker(channel)
+        worker.run()
 
 
 if __name__ == "__main__":
