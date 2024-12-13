@@ -2,7 +2,7 @@
 # python:3.11-slim-bookworm
 # python:3.12-slim
 # The official base ones are not too bad in any case
-FROM python:3.12
+FROM python:3.12-slim
 
 WORKDIR /app
 

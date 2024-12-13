@@ -10,3 +10,6 @@ Mostly interchangeable from what I can see for now.
 - `podman-build` (Containerfile / Dockerfile) vs `docker build` (Dockerfile)
 - `podman-compose` (and having to install it) vs `docker compose`
 
+## docker compose watch
+
+Interesting feature that I might not use yet, but putting a tab on it.
