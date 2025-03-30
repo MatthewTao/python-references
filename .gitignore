@@ -135,3 +135,5 @@ dmypy.json
 # IDE stuff
 .idea
 .vscode
+
+/nicegui/example_db.db
