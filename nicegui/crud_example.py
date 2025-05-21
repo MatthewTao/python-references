@@ -5,18 +5,21 @@ import sqlite3
 conn = sqlite3.connect("example_db.db", check_same_thread=False)
 cursor = conn.cursor()
 
-cursor.execute("""
+cursor.execute(
+    """
 CREATE TABLE IF NOT EXISTS "users" (
 	"id"	INTEGER,
 	"name"	TEXT,
 	"age"	INTEGER,
 	PRIMARY KEY("id" AUTOINCREMENT)
 );
-""")
+"""
+)
 
 name = ui.input(label="name").classes("w-full")
 age = ui.input(label="age").classes("w-full")
 get_id = ui.label()
+
 
 def clear_fields():
     name.value = ""
@@ -62,12 +65,15 @@ def edit_row(row):
 
 
 def delete_row(row):
-    cursor.execute("""DELETE FROM users WHERE id=?""", (row.default_slot.children[0].text,))
+    cursor.execute(
+        """DELETE FROM users WHERE id=?""", (row.default_slot.children[0].text,)
+    )
     conn.commit()
     all_data.clear()
     clear_fields()
     get_all_data()
     ui.notify("Deleted row")
+
 
 def get_all_data():
     cursor.execute("""SELECT * FROM users""")
@@ -86,18 +92,24 @@ def get_all_data():
             with ui.card():
                 with ui.row().classes("justify-between w-full") as card_data:
                     ui.label(x["id"])
-                    ui.label(x['name'])
+                    ui.label(x["name"])
                     ui.label(x["age"])
 
                 with ui.row():
                     # I don't really understand what's going on in these lines yet
-                    ui.button("edit").on("click", lambda e, card_data=card_data : edit_row(card_data)).classes("bg-blue")
-                    ui.button("delete").on("click", lambda e, card_data=card_data : delete_row(card_data)).classes("bg-red")
+                    ui.button("edit").on(
+                        "click", lambda e, card_data=card_data: edit_row(card_data)
+                    ).classes("bg-blue")
+                    ui.button("delete").on(
+                        "click", lambda e, card_data=card_data: delete_row(card_data)
+                    ).classes("bg-red")
 
 
 def add_new_row():
     try:
-        cursor.execute("""INSERT INTO users (name, age) VALUES (?, ?)""", (name.value, age.value))
+        cursor.execute(
+            """INSERT INTO users (name, age) VALUES (?, ?)""", (name.value, age.value)
+        )
         conn.commit()
         ui.notify("Added row", color="green")
 
