@@ -13,3 +13,11 @@ Mostly interchangeable from what I can see for now.
 ## docker compose watch
 
 Interesting feature that I might not use yet, but putting a tab on it.
+
+## Podman
+
+Fairly straight forward, just able to use something like that to recreate the container and go from there
+
+```commandline
+podman compose up --force-recreate --build -d
+```
