@@ -7,7 +7,7 @@ def simple_map_example():
     def myfunc(n) -> int:
         return len(n)
 
-    results = map(myfunc, ('apple', 'banana', 'cherry'))
+    results = map(myfunc, ("apple", "banana", "cherry"))
     for result in results:
         print(result)
 
@@ -20,6 +20,7 @@ def more_parameters_example():
     """
     The function just needs to have the same number of parameters as the number of iterables
     """
+
     def other_function(a, b):
         return a + b
 
@@ -29,11 +30,16 @@ def more_parameters_example():
 
 
 def simple_filter():
-    people = [{"name": "Bob", "age": 12}, {"name": "Carl", "age": 21}, {"name": "Dyson", "age": 19}]
+    people = [
+        {"name": "Bob", "age": 12},
+        {"name": "Carl", "age": 21},
+        {"name": "Dyson", "age": 19},
+    ]
 
     def over_eighteen(person):
         age = person.get("age")
         return age > 18
+
     over_eighteens = filter(over_eighteen, people)
     assert len(list(over_eighteens)) == 2
     for item in over_eighteens:
