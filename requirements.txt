@@ -13,5 +13,6 @@ Pillow
 plyer
 PyYAML
 requests
+selenium
 simpy
 sqlalchemy
