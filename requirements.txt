@@ -16,3 +16,4 @@ requests
 selenium
 simpy
 sqlalchemy
+plotly
