@@ -1,0 +1,6 @@
+# Downloaded Piper voice models (tens of MB each)
+*.onnx
+*.onnx.json
+
+# Generated audio output
+*.wav
